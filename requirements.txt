@@ -1,0 +1,12 @@
+﻿streamlit>=1.25.0
+streamlit-extras>=0.3.0
+pypdf>=3.0.0
+langchain>=0.1.0
+sentence-transformers>=2.2.2
+chromadb>=0.4.24
+transformers>=4.36.0
+accelerate>=0.21.0
+torch>=2.0.0
+scikit-learn>=1.2.0
+python-dotenv>=1.0.0
+loguru>=0.7.0
