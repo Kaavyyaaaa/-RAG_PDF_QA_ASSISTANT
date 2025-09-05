@@ -38,15 +38,14 @@ def load_llm(model_name: str = DEFAULT_MODEL) -> Any:
         raise
 
 def format_prompt(question: str, context: str) -> str:
-    """
-    Formats the prompt for Q&A generation.
-    Args:
-        question (str): User question.
-        context (str): Retrieved context.
-    Returns:
-        str: Formatted prompt.
-    """
-    return f"Answer the question based on the context below.\n\nContext:\n{context}\n\nQuestion: {question}\nAnswer:"
+    return (
+        "You are a helpful assistant. "
+        "Answer the question using ONLY the context below. "
+        "If the answer is not in the context, say 'I don't know.' "
+        "Be as detailed as possible.\n\n"
+        f"Context:\n{context}\n\n"
+        f"Question: {question}\nAnswer:"
+    )
 
 def generate_answer(
     question: str,

@@ -86,9 +86,9 @@ def display_error(msg: str):
 def display_success(msg: str):
     st.success(f"✅ {msg}")
 
-def show_sources(sources: List[dict]):
+def show_sources(sources: List[dict], msg_idx: int):
     for idx, src in enumerate(sources):
-        with stylable_container(key=f"src_{idx}", css_styles="margin-bottom:4px;"):
+        with stylable_container(key=f"src_{msg_idx}_{idx}", css_styles="margin-bottom:4px;"):
             st.markdown(f"<div class='stSourceBox'>PDF: <b>{src['source_pdf']}</b> | Chunk: {src['chunk_index']} | Score: {src['score']:.2f}</div>", unsafe_allow_html=True)
 
 # --- Main App ---
@@ -158,13 +158,13 @@ def main():
         return
 
     # Chat history display
-    for msg in st.session_state.chat_history:
+    for msg_idx, msg in enumerate(st.session_state.chat_history):
         if msg["role"] == "user":
             st.markdown(f"<div class='stChatUser'><b>You:</b> {msg['content']}</div>", unsafe_allow_html=True)
         else:
             st.markdown(f"<div class='stChatMessage'><b>Assistant:</b> {msg['content']}</div>", unsafe_allow_html=True)
             if msg.get("sources"):
-                show_sources(msg["sources"])
+                show_sources(msg["sources"], msg_idx)
             if msg.get("confidence") is not None:
                 st.markdown(f"<span class='stConfidence'>Confidence: {msg['confidence']:.2f}</span>", unsafe_allow_html=True)
 
